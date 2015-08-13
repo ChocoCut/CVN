@@ -52,7 +52,8 @@ public class Audio {
   /**
    * New Audio System
    * Uses MediaPlayer to allow seeking
-   * of certain times in audio file.
+   * of certain times in audio file and
+   * loop the audio file.
    * 
    * @author Nick
    */
