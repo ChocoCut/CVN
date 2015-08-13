@@ -23,6 +23,18 @@
   -fx-background-position: center center;
   -fx-background-size: 1920 1080;
 }
+.MainMenuBackground_UNBRIGHT720p {
+  -fx-background-image: url('../graphics/MenuTitleScreen_UNBRIGHT.png');
+  -fx-background-repeat: stretch;
+  -fx-background-position: center center;
+  -fx-background-size: 1280 720;
+}
+.MainMenuBackground_UNBRIGHT1080p {
+  -fx-background-image: url('../graphics/MenuTitleScreen_UNBRIGHT.png');
+  -fx-background-repeat: stretch;
+  -fx-background-position: center center;
+  -fx-background-size: 1920 1080;
+}
 
 .menuButton {
   -fx-background-color: linear-gradient(#3db1ff,#2980b9);
