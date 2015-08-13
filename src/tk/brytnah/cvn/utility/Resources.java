@@ -10,6 +10,14 @@ import tk.brytnah.cvn.Main;
 * @Time 5:07:34 PM
 */
 public class Resources {
+  /**
+   * Returns the URL of the specified
+   * resource's path.
+   * 
+   * @author Nick
+   * @param path
+   * @return URL
+   */
   public URL getResource(String path){
     return Main.class.getResource(path);
   }
