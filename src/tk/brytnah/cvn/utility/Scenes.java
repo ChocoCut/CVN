@@ -37,7 +37,7 @@ public class Scenes {
    * @author Nick
    */
   final private HashMap<String, GameScene> scenes = new HashMap<>();
-  public HashMap getGameScene() { return this.scenes; }
+  public HashMap getGameScenes() { return this.scenes; }
   public void addScene(String sceneName, GameScene gameScene){
     this.scenes.put(sceneName, gameScene);
   }

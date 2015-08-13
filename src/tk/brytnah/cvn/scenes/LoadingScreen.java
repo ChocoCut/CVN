@@ -102,6 +102,7 @@ public class LoadingScreen {
        super.succeeded();
        vb.getChildren().add(new Label("Done"));
        Main.pStage.setScene((Scene) Main.scenes.getScene("MainMenu"));
+       ((GameScene) Main.scenes.getGameScenes().get("MainMenu")).startAudio();
        Main.setCSS("Main.css");
     }
     @Override
