@@ -10,7 +10,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import tk.brytnah.cvn.Main;
 import tk.brytnah.cvn.utility.Audio;
-import tk.brytnah.cvn.utility.Resources;
 import tk.brytnah.cvn.utility.Scenes;
 
 /**
@@ -52,7 +51,7 @@ public class LoadingScreen {
   public Scene getScene(){  return this.scene;  }
   
   Task<Void> loadingTask = new Task<Void>() {
-    String[] resources = {
+    Object[] resources = {
       "AirportLounge.mp3",
       "BassWalker.mp3",
       "Carefree.mp3",
@@ -70,7 +69,8 @@ public class LoadingScreen {
       "Overcast.mp3",
       "TheBuilder.mp3",
       "TwoFingerJohnny.mp3",
-      "MainMenu.scene"
+      new MainMenu(),
+      new OptionsMenu()
     };
     @Override
     protected Void call() throws Exception {
@@ -78,21 +78,21 @@ public class LoadingScreen {
       Scenes scenes = Main.scenes;
       int progress = 0;
       int maxprogress = resources.length;
-      for(String resource : resources){
-        String[] nameParts = resource.split("\\.");
-        if(nameParts[1].equals("mp3")){
-          updateMessage("Loading "+resource+"...");
-          audio.addAudio(resource);
-          updateMessage("Loaded "+resource);
-          progress++;
-          updateProgress(progress,maxprogress);
+      for(Object resource : resources){
+        if(resource instanceof String){
+          String[] nameParts = ((String)resource).split("\\.");
+          if(nameParts[1].equals("mp3")){
+            updateMessage("Loading "+resource+"...");
+            audio.addMedia((String)resource);
+            updateMessage("Loading "+resource+".");
+            updateProgress(progress++,maxprogress);
+          }
         }
-        if(nameParts[1].equals("scene")){
-          System.out.println(nameParts[0]);
-          updateMessage("Loading a Scene "+nameParts[0]+"...");
-          scenes.addScene(nameParts[0], new MainMenu().getScene());
-          progress++;
-          updateProgress(progress,maxprogress);
+        if(resource instanceof GameScene){
+          updateMessage("Loading a scene...");
+          scenes.addScene(((GameScene)resource).getName(), ((GameScene)resource));
+          updateMessage("Loading scene.");
+          updateProgress(progress++,maxprogress);
         }
       }
       return null;
@@ -101,8 +101,8 @@ public class LoadingScreen {
     protected void succeeded(){
        super.succeeded();
        vb.getChildren().add(new Label("Done"));
-       Main.pStage.setScene((Scene) Main.scenes.getScenes().get("MainMenu"));
-       Main.setCSS(new Resources().getResource("css/Main.css"));
+       Main.pStage.setScene((Scene) Main.scenes.getScene("MainMenu"));
+       Main.setCSS("Main.css");
     }
     @Override
     protected void failed(){
