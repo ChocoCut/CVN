@@ -1,7 +1,6 @@
 
 package tk.brytnah.cvn;
 
-import java.net.URL;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -43,8 +42,8 @@ public class Main extends Application {
     scenes = new Scenes();
     launch(args);
   }
-  public static void setCSS(URL cssFile){
-    pStage.getScene().getStylesheets().add(cssFile.toExternalForm());
+  public static void setCSS(String cssFile){
+    pStage.getScene().getStylesheets().add(new Resources().getResource("css/"+cssFile).toExternalForm());
   }
   public static void applicationFailed(){
     Main.pStage.setScene(new Scene(new GridPane()));
